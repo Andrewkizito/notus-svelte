@@ -4,11 +4,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import css from "rollup-plugin-css-only";
 import { terser } from "rollup-plugin-terser";
-// library that helps you import in svelte with
-// absolute paths, instead of
-// import Component  from "../../../../components/Component.svelte";
-// we will be able to say
-// import Component from "components/Component.svelte";
 import alias from "@rollup/plugin-alias";
 import fs from "fs";
 
