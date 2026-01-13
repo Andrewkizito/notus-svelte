@@ -2,6 +2,7 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
+import css from "rollup-plugin-css-only";
 import { terser } from "rollup-plugin-terser";
 // library that helps you import in svelte with
 // absolute paths, instead of
@@ -154,15 +155,14 @@ export default {
   },
   plugins: [
     svelte({
-      // enable run-time checks when not in production
-      dev: !production,
-      // we'll extract any component CSS out into
-      // a separate file - better for performance
-      css: (css) => {
-        css.write("bundle.css");
-      },
+      // enable run-time checks when not in production (new plugin API)
+      compilerOptions: { dev: !production },
+      // emit CSS as "virtual" files for other plugins to handle
+      emitCss: true,
     }),
 
+    // write out the emitted CSS to a single bundle file
+    css({ output: "bundle.css" }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -
